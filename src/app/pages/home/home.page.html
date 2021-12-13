@@ -33,8 +33,8 @@
       <ng-container *ngIf="node.type == 'folder'">
         <img src="/assets/icons/folder-open-regular.svg">
         {{node.name}}
-        <button class="add-button"> add </button>
-        <button class="delete-button"> delete</button>
+        <button class="add-button"(click)="createNode(node.id)" > A </button>
+        <button class="delete-button" (click)="deleteNode(node.id)"> D</button>
       </ng-container>
 
       <ng-container *ngIf="node.type == 'file'">

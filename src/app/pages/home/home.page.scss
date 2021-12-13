@@ -54,7 +54,16 @@
         color: var(--app-color-white);
        }
 
-       .node{}
+
+
+       .add-button,.delete-button{
+        display: none;
+        margin-left: 0.5em;
+        border-radius: 50%;
+        width: 1em;
+        height: 1em;
+        border: 1px solid var(--app-color-black);
+       }
 
       &-row{
         display: flex;
@@ -65,6 +74,9 @@
 
         &:hover{
           border: 1px solid var(--app-color-black);
+          .add-button,.delete-button{
+            display: flex;
+          }
         }
 
       }

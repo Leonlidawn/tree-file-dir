@@ -83,9 +83,24 @@ export class FilesService {
   }
 
   public deleteNode(nodeId:string){
-    //files does not exist
+    this.deleteNodeHelper(nodeId);
+    this.filesUpdatedAt$.next(Date.now());
+  }
+
+
+  private deleteNodeHelper(nodeId:string){
+       //files does not exist
     if(!this.nodeRecords[nodeId]){
       return;
+    }
+
+    const node = this.nodeRecords[nodeId];
+    if(node.type == "folder"){
+      node.children?.forEach(
+        (f)=>{
+          this.deleteNodeHelper(f.id)
+        }
+      )
     }
 
     //remove from records
@@ -94,19 +109,22 @@ export class FilesService {
     //if has parent
     if(this.parentRecords[nodeId]){
       //remove from parent
-      this.nodeRecords[this.parentRecords[nodeId]].children.filter(
-        (node)=>node.id !== nodeId
-      )
+      const parent =this.nodeRecords[this.parentRecords[nodeId]];
+      if(parent.children){
+        parent.children = parent.children.filter(
+          (node)=>node.id !== nodeId
+        )
+      }
       //remove parent record
       delete(this.parentRecords[nodeId])
     }else{//remove from rootNodes
-      this.rootNodes.filter(
-        (node)=>{
-          node.id !== nodeId;
-        }
+
+      this.rootNodes = this.rootNodes.filter(
+        (node)=>node.id !== nodeId
       )
+      console.log(this.rootNodes)
+
     }
-    this.filesUpdatedAt$.next(Date.now());
   }
 
 }

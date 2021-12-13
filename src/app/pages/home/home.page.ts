@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
   }
 
   public createNode(parentId?:string){
-    this.fileService.createAndInsertNode(parentId,'folder','folder');
+    this.fileService.createAndInsertNode(parentId,'folder','placeholder');
   }
 
   public addingFolderToRoot(){
@@ -67,5 +67,7 @@ export class HomePage implements OnInit {
     }
   }
 
-
+  public deleteNode(id:string){
+    this.fileService.deleteNode(id);
+  }
 }
