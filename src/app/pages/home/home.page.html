@@ -1,4 +1,59 @@
-<div>
-  home page
+<div class="home-page">
+  <button class="add-to-root-button" (click)="addingFolderToRoot()">Add folder to root</button>
+  <div class="tree-area">
+    <ul>
+      <li *ngFor="let node of files">
+        <ng-container *ngTemplateOutlet="nodeTemplate; context:{node:node}"></ng-container>
+      </li>
+      <li [hidden]="!isAddingFolderToRoot" class="node editing">
+          <img src="/assets/icons/folder-open-regular.svg">
+          <input #autoFocusInput type="text" [(ngModel)]="newFileName" (keyup)="handleInputKeyUp($event)">
+          <button class="confirm-button" (click)="createNodeToRoot()">
+            &#10004;
+          </button>
+          <button class="cancel-button" (click)="cancelAddingFolderToRoot()">
+            &#10005;
+          </button>
+      </li>
+    </ul>
+  </div>
+
+  <textarea class="json-area" readonly>
+    {{filesJson}}
+  </textarea>
 
 </div>
+
+
+
+<ng-template #nodeTemplate let-node="node">
+  <ul class="node">
+    
+    <div class="node-row" >
+      <ng-container *ngIf="node.type == 'folder'">
+        <img src="/assets/icons/folder-open-regular.svg">
+        {{node.name}}
+        <button class="add-button"> add </button>
+        <button class="delete-button"> delete</button>
+      </ng-container>
+
+      <ng-container *ngIf="node.type == 'file'">
+        <img src="/assets/icons/file-regular.svg">
+        {{node.name}}
+      </ng-container>
+
+
+    </div>
+
+
+    <button>
+    </button>
+
+    <button>
+    </button>
+
+    <li *ngFor="let node of node.children">
+      <ng-container *ngTemplateOutlet="nodeTemplate; context:{node:node}"></ng-container>
+    </li>
+  </ul>
+</ng-template>

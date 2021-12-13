@@ -1,0 +1,113 @@
+:host{
+  --json-area-background-color: var(--app-color-grey);
+}
+
+
+
+.home-page{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  overflow-y: scroll;
+  .add-to-root-button{
+    border-radius: 0.2em;
+    min-height:2.5em;
+    width: 10em;
+    background-color: var(--app-color-black);
+    color: var(--app-color-white);
+    margin: 1em;
+  }
+  .tree-area{
+    display: flex;
+    flex-grow: 1;
+    padding: 1em;
+    flex-direction: column;
+
+    .node{
+      position: relative;
+      $button-height:1.5em;
+
+      &.editing{
+        border: 1px solid var(--app-color-black);
+        width: fit-content;
+        padding: 0.5em;
+        font-size: 105%;
+      }
+
+      img{
+        width:  1em;
+        height: 1em;
+        margin-right: 0.5em;
+       }
+
+       .cancel-button,.confirm-button{
+        width: 1.5em;
+        height: 1.5em;
+        margin-left: 0.5em;
+        background-color: var(--app-color-white);
+        border: 1px solid var(--app-color-black);
+       }
+
+       .confirm-button{
+        background-color: var(--app-color-black);
+        color: var(--app-color-white);
+       }
+
+       .node{}
+
+      &-row{
+        display: flex;
+        width: fit-content;
+        height: $button-height;
+        align-items: center;
+        background-color: transparent;
+
+        &:hover{
+          border: 1px solid var(--app-color-black);
+        }
+
+      }
+
+
+      & >li{
+        position: relative;
+        $indent:1.5em;
+        padding-left: $indent;
+        // &:not(:last-child) >.node>button::before{
+        //     content: "";
+        //     position: absolute;
+        //     width: $indent;
+        //     height: calc(100% - #{$button-height} / 2);
+        //     left: calc( #{$indent} / 2 );
+        //     border-left: 1px solid var(--app-color-black);
+        // }
+
+        // &:last-child{
+        //   &::before{
+        //     content: "";
+        //     position: absolute;
+        //     height: calc(#{$button-height}/2);
+        //     width:calc( #{$indent} / 4 );
+        //     left: calc( #{$indent} / 2 );
+        //     border-left: 1px solid var(--app-color-black);
+        //     border-bottom: 1px solid var(--app-color-black);;
+        //   }
+        // }
+      }
+    }
+
+
+
+
+  }
+  .json-area{
+    padding: 1em;
+    background-color: var(--json-area-background-color);
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    min-height: 40%;
+  }
+
+}

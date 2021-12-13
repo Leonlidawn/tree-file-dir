@@ -1,2 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import './styles/normalize';
+@import './styles/reset';
+
+body{
+  --app-color-black:#000000;
+  --app-color-white:#ffffff;
+  --app-color-grey:#ebe7e7;
+}
+
+*{
+  box-sizing: border-box;
+}
